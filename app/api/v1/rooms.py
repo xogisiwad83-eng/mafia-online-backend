@@ -1,6 +1,6 @@
-from typing import List
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException
+
 from app.schemas import RoomCreate, RoomResponse
 from app.services.rooms import room_service
 
@@ -13,7 +13,7 @@ def create_room(room_data: RoomCreate, user_id: int):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.get("/", response_model=List[RoomResponse])
+@router.get("/", response_model=list[RoomResponse])
 def get_available_rooms():
     try:
         return room_service.get_available_rooms()

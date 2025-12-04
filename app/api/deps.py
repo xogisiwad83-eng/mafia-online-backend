@@ -1,8 +1,10 @@
-from fastapi import Depends
 from typing import Annotated
+
+from fastapi import Depends
 
 from app.services.players import PlayerService, player_service
 from app.services.rooms import RoomService, room_service
+
 
 def get_player_service() -> PlayerService:
     """Зависимость для получения сервиса игроков"""

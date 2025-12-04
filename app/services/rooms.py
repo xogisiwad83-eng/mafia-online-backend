@@ -1,6 +1,5 @@
-from typing import Optional, List
 
-from app.schemas.rooms import RoomResponse, RoomCreate, RoomStatus
+from app.schemas.rooms import RoomCreate, RoomResponse, RoomStatus
 
 
 class RoomService:
@@ -21,15 +20,15 @@ class RoomService:
         self._id_counter += 1
         return room
 
-    def get_room(self, room_id: int) -> Optional[RoomResponse]:
+    def get_room(self, room_id: int) -> RoomResponse | None:
         room = self._rooms_db.get(room_id)
         return room
 
-    def get_available_rooms(self)->List[RoomResponse]:
-        rooms=[ vaule for vaule in self._rooms_db.values() if vaule.status.value == RoomStatus.WAITING and vaule.current_players < vaule.max_players]
+    def get_available_rooms(self)->list[RoomResponse]:
+        rooms=[ value for value in self._rooms_db.values() if value.status.value == RoomStatus.WAITING and value.current_players < value.max_players]
         return rooms
 
-    def join_room(self, room_id: int) ->Optional[RoomResponse]:
+    def join_room(self, room_id: int) ->RoomResponse | None:
         room = self._rooms_db.get(room_id)
         if room is None:
             return None
